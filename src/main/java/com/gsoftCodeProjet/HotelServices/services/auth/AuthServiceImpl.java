@@ -37,7 +37,7 @@ public class AuthServiceImpl implements AuthService{
 
     public UserDto createUser(SignupRequest signupRequest){
         if (userRepository.findFirstByEmail(signupRequest.getEmail()).isPresent()){
-            throw new EntityExistsException("User Already Present With email" + signupRequest.getEmail());
+            throw new EntityExistsException("cette adresse e-mail est deja presente" + signupRequest.getEmail());
         }
         User user = new User();
         user.setEmail(signupRequest.getEmail());
