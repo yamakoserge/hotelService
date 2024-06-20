@@ -29,7 +29,7 @@ public class AuthController {
             return new ResponseEntity<>("Le nom existe déjà", HttpStatus.NOT_ACCEPTABLE);
 
         }catch (Exception e){
-            return new ResponseEntity<>("L'utilisateur n'a pas été créé, Essayez Encore!!!", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("L'Utilisation n'a pas été créé, Essayez Encore!!!", HttpStatus.BAD_REQUEST);
 
         }
 
