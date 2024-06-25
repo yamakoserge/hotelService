@@ -17,12 +17,11 @@ import java.util.Map;
 
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
-@CrossOrigin("*")
 public class SimpleCorsFilter implements Filter {
 
 
-    @Value("${app.client.url}")
-    private String clientAppUrl = "";
+   // @Value("${app.client.url}")
+    //private String clientAppUrl = "";
 
 
     public SimpleCorsFilter() {
