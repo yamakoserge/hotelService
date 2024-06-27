@@ -7,6 +7,7 @@ import com.gsoftCodeProjet.HotelServices.dto.UserDto;
 import com.gsoftCodeProjet.HotelServices.entity.User;
 import com.gsoftCodeProjet.HotelServices.repository.UserRepository;
 import com.gsoftCodeProjet.HotelServices.services.auth.AuthService;
+import com.gsoftCodeProjet.HotelServices.services.jwt.UserService;
 import com.gsoftCodeProjet.HotelServices.util.JwtUtil;
 import jakarta.persistence.EntityExistsException;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +29,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AuthController {
 
-
     private final AuthService authService;
 
     private final AuthenticationManager authenticationManager;
@@ -37,7 +37,9 @@ public class AuthController {
 
     private final JwtUtil jwtUtil;
 
+    private final UserService userService;
 
+//signup
     @PostMapping("/signup")
     public ResponseEntity<?> signupUser(@RequestBody SignupRequest signupRequest){
         try {
@@ -50,18 +52,17 @@ public class AuthController {
             return new ResponseEntity<>("L'Utilisation n'a pas été créé, Essayez Encore!!!", HttpStatus.BAD_REQUEST);
 
         }
-
     }
-
+    //login
     @PostMapping("/login")
-    public AuthenticationResponse createAuthencationToken(@RequestBody AuthenticationRequest authenticationRequest){
+    public AuthenticationResponse createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest){
         try{
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(),authenticationRequest.getPassword()));
 
         }catch (BadCredentialsException e){
             throw new BadCredentialsException("Incorrect username or password");
         }
-        final UserDetails userDetails= null;
+        final UserDetails userDetails= userService.userDetailsService().loadUserByUsername(authenticationRequest.getEmail());
         Optional<User> optionalUser = userRepository.findFirstByEmail(userDetails.getUsername());
         final String jwt = jwtUtil.generateToken(userDetails);
 
@@ -74,5 +75,7 @@ public class AuthController {
 
         return authenticationResponse;
     }
+
+
 
 }
