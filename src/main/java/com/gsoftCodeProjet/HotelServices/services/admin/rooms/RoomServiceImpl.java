@@ -16,9 +16,9 @@ public class RoomServiceImpl  implements RoomService{
         try{
             Room room = new Room();
 
-            room.setName(room.getName());
-            room.setType(room.getType());
-            room.setPrice(room.getPrice());
+            room.setName(roomDto.getName());
+            room.setPrice(roomDto.getPrice());
+            room.setType(roomDto.getType());
             room.setAvailable(true);
 
             roomRepository.save(room);
