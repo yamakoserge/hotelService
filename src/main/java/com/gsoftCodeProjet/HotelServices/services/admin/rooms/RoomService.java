@@ -9,4 +9,6 @@ public interface RoomService {
     RoomsResponseDto getAllRooms(int pageNumber);
 
     RoomDto getRoomsById(Long id);
+
+    boolean updateRoom(Long id , RoomDto roomDto);
 }

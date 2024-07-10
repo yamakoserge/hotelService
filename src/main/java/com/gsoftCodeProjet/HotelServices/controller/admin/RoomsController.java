@@ -14,29 +14,40 @@ import org.springframework.web.bind.annotation.*;
 public class RoomsController {
 
     private final RoomService roomService;
+
     @PostMapping("/room")
-    private ResponseEntity<?> postRoom(@RequestBody RoomDto roomDto){
+    private ResponseEntity<?> postRoom(@RequestBody RoomDto roomDto) {
         boolean success = roomService.postRoom(roomDto);
-        if (success){
+        if (success) {
             return ResponseEntity.status(HttpStatus.OK).build();
-        }else {
+        } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
 
     @GetMapping("/rooms/{pageNumber}")
-    public ResponseEntity<?> getAllRooms(@PathVariable int pageNumber){
+    public ResponseEntity<?> getAllRooms(@PathVariable int pageNumber) {
         return ResponseEntity.ok(roomService.getAllRooms(pageNumber));
     }
 
     @GetMapping("/room/{id}")
-    public ResponseEntity<?>getRoomById(@PathVariable Long id){
-        try{
+    public ResponseEntity<?> getRoomById(@PathVariable Long id) {
+        try {
             return ResponseEntity.ok(roomService.getRoomsById(id));
-        }catch (EntityNotFoundException e){
+        } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        }catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Someting went wrong");
+        }
+    }
+
+    @PutMapping("room/{id}")
+    public ResponseEntity<?> updateRoom(@PathVariable Long id, @RequestBody RoomDto roomDto){
+        boolean success = roomService.updateRoom(id, roomDto);
+        if(success){
+            return ResponseEntity.status(HttpStatus.OK).build();
+        }else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 }
