@@ -72,4 +72,14 @@ public class RoomsServiceImpl implements RoomService{
         }
         return false;
     }
+
+    public void deleteRoom(Long id){
+        Optional<Room> optionalRoom = roomRepository.findById(id);
+        if (optionalRoom.isPresent()){
+            roomRepository.deleteById(id);
+
+        }else {
+            throw new EntityNotFoundException("Room not present");
+        }
+    }
 }
