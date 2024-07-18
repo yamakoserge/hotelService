@@ -34,10 +34,10 @@ public class BookingServiceImpl implements BookingService{
             reservation.setRoom(optionalRoom.get());
             reservation.setUser(optionalUser.get());
             reservation.setCheckInDate(reservationDto.getCheckInDate());
-            reservation.setCheckoutDate(reservationDto.getCheckoutDate());
+            reservation.setCheckOutDate(reservationDto.getCheckOutDate());
             reservation.setReservationStatus(ReservationStatus.PENDING);
 
-            Long days = ChronoUnit.DAYS.between(reservationDto.getCheckInDate(),reservationDto.getCheckoutDate());
+            Long days = ChronoUnit.DAYS.between(reservationDto.getCheckInDate(),reservationDto.getCheckOutDate());
             reservation.setPrice(optionalRoom.get().getPrice()*days);
 
             reservationRepository.save(reservation);

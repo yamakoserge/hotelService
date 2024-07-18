@@ -18,7 +18,7 @@ public class Reservation {
 
     private LocalDate checkInDate;
 
-    private LocalDate checkoutDate;
+    private LocalDate checkOutDate;
 
     private Long price;
 
