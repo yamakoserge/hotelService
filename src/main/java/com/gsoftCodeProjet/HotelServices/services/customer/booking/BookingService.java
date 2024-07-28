@@ -5,4 +5,5 @@ import com.gsoftCodeProjet.HotelServices.dto.ReservationDto;
 public interface BookingService {
 
     boolean postReservation(ReservationDto reservationDto);
+
 }

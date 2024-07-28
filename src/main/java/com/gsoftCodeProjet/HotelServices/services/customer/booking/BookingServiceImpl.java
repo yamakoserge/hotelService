@@ -38,7 +38,7 @@ public class BookingServiceImpl implements BookingService{
             reservation.setReservationStatus(ReservationStatus.PENDING);
 
             Long days = ChronoUnit.DAYS.between(reservationDto.getCheckInDate(),reservationDto.getCheckOutDate());
-            reservation.setPrice(optionalRoom.get().getPrice()*days);
+            reservation.setPrice(optionalRoom.get().getPrice()* days);
 
             reservationRepository.save(reservation);
             return true;

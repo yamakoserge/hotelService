@@ -1,7 +1,7 @@
 package com.gsoftCodeProjet.HotelServices.controller.admin;
 
 import com.gsoftCodeProjet.HotelServices.dto.RoomDto;
-import com.gsoftCodeProjet.HotelServices.services.admin.rooms.RoomService;
+import com.gsoftCodeProjet.HotelServices.services.admin.rooms.RoomsService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class RoomsController {
 
-    private final RoomService roomService;
+    private final RoomsService roomService;
 
     @PostMapping("/room")
     private ResponseEntity<?> postRoom(@RequestBody RoomDto roomDto) {
@@ -37,7 +37,7 @@ public class RoomsController {
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Someting went wrong");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong");
         }
     }
 
